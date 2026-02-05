@@ -1,1 +1,1 @@
-print("Chess project github test")
+print("Chess project githgit --versionub test")
