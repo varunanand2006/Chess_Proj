@@ -43,7 +43,10 @@ class Pawn(Piece):
 
    def get_attack_squares(self, board):
        attacks = []
-       direction = -1 if self.color == "White" else 1
+       if self.color == "White":
+           direction = -1
+       else:
+           direction = 1
 
 
        for dx in (-1, 1):
@@ -104,8 +107,8 @@ class Bishop(Piece):
 
    def get_pseudo_legal_moves(self, board):
        moves = []
+       # 4 diagonal directions
        directions = [(1, 1), (-1, -1), (1, -1), (-1, 1)]
-
 
        for dx, dy in directions:
            x, y = self.x, self.y
@@ -167,9 +170,9 @@ class Rook(Piece):
 
    def get_pseudo_legal_moves(self, board):
        moves = []
+
+       # 4 cardinal directions
        directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
-
-
        for dx, dy in directions:
            x, y = self.x, self.y
            while True:
@@ -202,9 +205,9 @@ class Queen(Piece):
 
    def get_pseudo_legal_moves(self, board):
        moves = []
+
+       # 4 diagonal and 4 cardinal directions
        directions = [(1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (-1, 1), (1, -1), (-1, -1)]
-
-
        for dx, dy in directions:
            x, y = self.x, self.y
            while True:
@@ -237,6 +240,7 @@ class King(Piece):
 
    def get_pseudo_legal_moves(self, board):
        moves = []
+       # All 8 adjacent squares
        directions = [(1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (-1, 1), (1, -1), (-1, -1)]
 
 
