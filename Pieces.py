@@ -1,6 +1,6 @@
 
 
-# General parent class for the pieces classes
+
 
 
 def is_enemy(piece1, piece2):
@@ -8,7 +8,7 @@ def is_enemy(piece1, piece2):
        return False
    return piece1.color != piece2.color
 
-
+# General parent class for the pieces classes
 class Piece:
    name = " "
    color = ""
@@ -18,17 +18,17 @@ class Piece:
 
 
    def __init__(self, name, color, x, y, points):
-       self.name = name
-       self.color = color
-       self.x = x
-       self.y = y
-       self.points = points
+       self.name = name     # Piece name
+       self.color = color   # Either black or white
+       self.x = x           # Column position
+       self.y = y           # Row position
+       self.points = points # Points used for evaluation
 
-
+    # Return list of legal moves without checks
    def get_pseudo_legal_moves(self, board):
        return []
 
-
+    # String representation of a piece (based on color & piece type)
    def __str__(self):
        return " "
 
@@ -51,7 +51,6 @@ class Pawn(Piece):
            y = self.y + direction
            if board.in_bounds(x, y):
                attacks.append((x, y))
-
 
        return attacks
 
@@ -85,7 +84,6 @@ class Pawn(Piece):
            cx, cy = self.x + dx, self.y + direction
            if board.is_enemy_square(self, cx, cy):
                moves.append((cx, cy))
-
 
        return moves
 
@@ -159,6 +157,7 @@ class Knight(Piece):
            return "n"
        else:
            return " "
+
 
 
 class Rook(Piece):
