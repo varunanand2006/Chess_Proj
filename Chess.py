@@ -38,11 +38,7 @@ class Board:
        self.move_list = []
        self.taken_pieces = []
 
-
-   def set_piece(self, piece, x, y):
-       self.board[y][x] = piece
-
-
+    # Evaluation function
    def return_eval(self):
        total_eval = 0
        for row in self.board:
@@ -113,7 +109,7 @@ class Board:
            self.turn = "White"
        return True
 
-
+    # Returns true if the coordinates are on the board
    def in_bounds(self, x, y):
        return 0 <= x < 8 and 0 <= y < 8
 
@@ -202,32 +198,30 @@ class Board:
                        moves.append((piece, move))
        return moves
 
-
+    # Returns true if square is empty
    def is_empty(self, x, y):
        if not self.in_bounds(x, y):
            return False
        return self.board[y][x] is None
 
-
+    # Returns true if piece and piece at coordinates are opposite colors
    def is_enemy_square(self, piece, x, y):
        if not self.in_bounds(x, y):
            return False
        target = self.board[y][x]
        return target is not None and target.color != piece.color
 
-
+    # Set starting board position
    def setup_starting_board(self):
        # Clear the board first
        for y in range(8):
            for x in range(8):
                self.board[y][x] = None
 
-
        # --- Pawns ---
        for x in range(8):
            self.board[6][x] = Pawn("White", x, 6)  # 2nd rank for White
            self.board[1][x] = Pawn("Black", x, 1)  # 7th rank for Black
-
 
        # --- Rooks ---
        self.board[7][0] = Rook("White", 0, 7)
@@ -235,13 +229,11 @@ class Board:
        self.board[0][0] = Rook("Black", 0, 0)
        self.board[0][7] = Rook("Black", 7, 0)
 
-
        # --- Knights ---
        self.board[7][1] = Knight("White", 1, 7)
        self.board[7][6] = Knight("White", 6, 7)
        self.board[0][1] = Knight("Black", 1, 0)
        self.board[0][6] = Knight("Black", 6, 0)
-
 
        # --- Bishops ---
        self.board[7][2] = Bishop("White", 2, 7)
@@ -249,21 +241,18 @@ class Board:
        self.board[0][2] = Bishop("Black", 2, 0)
        self.board[0][5] = Bishop("Black", 5, 0)
 
-
        # --- Queens ---
        self.board[7][3] = Queen("White", 3, 7)
        self.board[0][3] = Queen("Black", 3, 0)
-
 
        # --- Kings ---
        self.board[7][4] = King("White", 4, 7)
        self.board[0][4] = King("Black", 4, 0)
 
-
        # Set starting turn
        self.turn = "White"
 
-
+    # Print board
    def __str__(self):
        ret = "--------------------------\n"
        for i in range(8):
